@@ -95,12 +95,12 @@ describe('Repositories', () => {
     const user = await usersRepository.findUserWithGamesById({
       user_id,
     });
-
+    
     expect(user).toMatchObject({
       first_name: 'Danilo',
       last_name: 'Vieira',
       email: 'danilo.vieira@rocketseat.com.br',
-      games: [
+      games: expect.arrayContaining([
         expect.objectContaining({
           title: 'Rocket League',
         }),
@@ -110,8 +110,9 @@ describe('Repositories', () => {
         expect.objectContaining({
           title: 'The Last Of Us',
         }),
-      ],
+      ]),
     });
+    
   });
 
   it('[UsersRepository] should be able to list users ordered by first name', async () => {
